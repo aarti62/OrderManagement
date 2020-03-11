@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OrderManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ORDER_DETAILS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERID" Type="bigint" />
+    <Property Name="ORDER_DATE" Type="date" />
+    <Property Name="STATUS" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ORDER_ITEM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PRODUCTID" Type="int" />
+    <Property Name="ORDERID" Type="int" />
+    <Property Name="QUANTITY" Type="int" />
+  </EntityType>
+  <EntityType Name="PRODUCT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar(max)" />
+    <Property Name="BRAND" Type="varchar(max)" />
+    <Property Name="WEIGHT" Type="float" />
+    <Property Name="HEIGHT" Type="float" />
+    <Property Name="PRODUCT_IMAGE" Type="varbinary(max)" />
+    <Property Name="BARCODE" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="USER_INFO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERID" Type="bigint" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+    <Property Name="PHONE" Type="int" />
+    <Property Name="SHIPPING_ADDRESS" Type="nvarchar(max)" />
+    <Property Name="PINCODE" Type="int" />
+    <Property Name="STATE" Type="varchar" MaxLength="100" />
+    <Property Name="CITY" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="USER_RECORD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERNAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="PASSWORD" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__ORDER_DET__USERI__182C9B23">
+    <End Role="USER_RECORD" Type="Self.USER_RECORD" Multiplicity="0..1" />
+    <End Role="ORDER_DETAILS" Type="Self.ORDER_DETAILS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER_RECORD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ORDER_DETAILS">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER_ITE__ORDER__1BFD2C07">
+    <End Role="ORDER_DETAILS" Type="Self.ORDER_DETAILS" Multiplicity="0..1" />
+    <End Role="ORDER_ITEM" Type="Self.ORDER_ITEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDER_DETAILS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ORDER_ITEM">
+        <PropertyRef Name="ORDERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER_ITE__PRODU__1B0907CE">
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="0..1" />
+    <End Role="ORDER_ITEM" Type="Self.ORDER_ITEM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ORDER_ITEM">
+        <PropertyRef Name="PRODUCTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__USER_INFO__USERI__1367E606">
+    <End Role="USER_RECORD" Type="Self.USER_RECORD" Multiplicity="0..1" />
+    <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER_RECORD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="USER_INFO">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OrderManagementModelStoreContainer">
+    <EntitySet Name="ORDER_DETAILS" EntityType="Self.ORDER_DETAILS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDER_ITEM" EntityType="Self.ORDER_ITEM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USER_INFO" EntityType="Self.USER_INFO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USER_RECORD" EntityType="Self.USER_RECORD" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ORDER_DET__USERI__182C9B23" Association="Self.FK__ORDER_DET__USERI__182C9B23">
+      <End Role="USER_RECORD" EntitySet="USER_RECORD" />
+      <End Role="ORDER_DETAILS" EntitySet="ORDER_DETAILS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_ITE__ORDER__1BFD2C07" Association="Self.FK__ORDER_ITE__ORDER__1BFD2C07">
+      <End Role="ORDER_DETAILS" EntitySet="ORDER_DETAILS" />
+      <End Role="ORDER_ITEM" EntitySet="ORDER_ITEM" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_ITE__PRODU__1B0907CE" Association="Self.FK__ORDER_ITE__PRODU__1B0907CE">
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="ORDER_ITEM" EntitySet="ORDER_ITEM" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USER_INFO__USERI__1367E606" Association="Self.FK__USER_INFO__USERI__1367E606">
+      <End Role="USER_RECORD" EntitySet="USER_RECORD" />
+      <End Role="USER_INFO" EntitySet="USER_INFO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

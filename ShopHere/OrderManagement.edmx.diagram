@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3783ff4c817b48ddaa0363a1da6fe10c" Name="Diagram1">
+        <EntityTypeShape EntityType="OrderManagementModel.ORDER_DETAILS" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagementModel.ORDER_ITEM" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagementModel.PRODUCT" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagementModel.USER_INFO" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagementModel.USER_RECORD" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <AssociationConnector Association="OrderManagementModel.FK__ORDER_DET__USERI__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagementModel.FK__ORDER_ITE__ORDER__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagementModel.FK__ORDER_ITE__PRODU__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagementModel.FK__USER_INFO__USERI__1367E606" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
